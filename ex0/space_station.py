@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field
 from datetime import datetime
 from typing import Optional
+from pydantic import ValidationError
 
 
 class SpaceStation(BaseModel):
@@ -11,25 +12,48 @@ class SpaceStation(BaseModel):
     oxygen_level: float = Field(ge=0.0, le=100.0)
     last_maintenance: datetime
     is_operational: bool = True
-    notes: Optional[str] = Field(max_length=200)
+    notes: Optional[str] = Field(default=None, max_length=200)
 
 
 def main():
     print("Space Station Data Validation")
     print("========================================")
-    data = SpaceStation(
-        station_id="ISS001", name="International Space Station",
-        crew_size=6, power_level=85.5, oxygen_level=92.3, notes="Operational")
+    try:
+        data = SpaceStation(
+            station_id="ISS001", name="International Space Station",
+            crew_size=6, power_level=85.5, oxygen_level=92.3,
+            last_maintenance="2026-07-11")
 
-    print("Valid station created:")
-    print(f"ID: {data.station_id}")
-    print(f"Name: {data.name}")
-    print(f"Crew: {data.crew_size}")
-    print(f"Power: {data.power_level}")
-    print(f"Oxygen: {data.oxygen_level}")
-    print(f"Status: {data.notes}")
-    print()
-    print("========================================")
+        print("Valid station created:")
+        print(f"ID: {data.station_id}")
+        print(f"Name: {data.name}")
+        print(f"Crew: {data.crew_size}")
+        print(f"Power: {data.power_level}")
+        print(f"Oxygen: {data.oxygen_level}")
+        if data.is_operational is True:
+            print("Status: Operational")
+        else:
+            print("Status: Not Operational")
+        print()
+        print("========================================")
+        data = SpaceStation(
+            station_id="ISS001", name="International Space Station",
+            crew_size=21, power_level=85.5, oxygen_level=92.3,
+            last_maintenance="2026-07-11")
+        print("Valid station created:")
+        print(f"ID: {data.station_id}")
+        print(f"Name: {data.name}")
+        print(f"Crew: {data.crew_size}")
+        print(f"Power: {data.power_level}")
+        print(f"Oxygen: {data.oxygen_level}")
+        if data.is_operational is True:
+            print("Status: Operational")
+        else:
+            print("Status: Not Operational")
+    except ValidationError as e:
+        print("Expected validation error:")
+        print(f"{e}")
+        # error mesajını kontrol et
 
 
 if __name__ == "__main__":
