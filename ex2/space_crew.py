@@ -1,6 +1,5 @@
 from pydantic import BaseModel, Field
 from datetime import datetime
-from typing import Optional
 from pydantic import ValidationError
 from enum import Enum
 from pydantic import model_validator
@@ -38,3 +37,35 @@ class SpaceMission(BaseModel):
     def validator_rules(self) -> 'SpaceMission':
         if not self.mission_id.startswith("M"):
             raise ValueError(" Mission ID must start with 'M'")
+        for element in self.crew:
+            if (
+                element.rank.value == "commander" or
+                element.rank.value == "captain"
+            ):
+                pass
+            else:
+                raise ValueError("Must have at least one Commander or Captain")
+
+        number_crew = len(self.crew)
+        i = 0
+        for _ in range(number_crew):
+            if self.duration_days > 365:
+                if self.years_experience > 5:
+                    i += 1
+                else:
+                    pass
+        if i > (number_crew/2):
+            pass
+        else:
+            raise ValueError("Long missions (> 365 days) need 50% "
+                             "experienced crew (5+ years)")
+        j = 0
+        for elements in range(number_crew):
+            if elements.is_active is True:
+                j += 1
+            else:
+                pass
+        if i == number_crew:
+            pass
+        else:
+            print("All crew members must be active")
