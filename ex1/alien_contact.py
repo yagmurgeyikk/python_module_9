@@ -75,7 +75,8 @@ def main() -> None:
         print(f"Message: {data.message_received}")
     except ValidationError as e:
         print("Expected validation error:")
-        print(e)
+        for err in e.errors():
+            print(err["msg"])
 
 
 if __name__ == "__main__":

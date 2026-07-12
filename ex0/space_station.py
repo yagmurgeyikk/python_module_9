@@ -1,3 +1,4 @@
+# projenin error mesajlarını düzlenle .error ekle
 from pydantic import BaseModel, Field
 from datetime import datetime
 from typing import Optional
@@ -52,8 +53,8 @@ def main() -> None:
             print("Status: Not Operational")
     except ValidationError as e:
         print("Expected validation error:")
-        print(f"{e}")
-        # error mesajını kontrol et
+        for err in e.errors():
+            print(err["msg"])
 
 
 if __name__ == "__main__":
