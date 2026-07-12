@@ -6,7 +6,7 @@ from enum import Enum
 from pydantic import model_validator
 
 
-class Contact(str, Enum):
+class Contact(Enum):
     radio = "radio"
     visual = "visual"
     physical = "physical"
@@ -23,19 +23,60 @@ class AlienContact(BaseModel):
     witness_count: int = Field(ge=1, le=100)
     message_received: Optional[str] = Field(max_length=500)
     is_verified: bool = False
+
+    @model_validator(mode='after')
+    def validator_rules(self) -> 'AlienContact':
+        if not self.contact_id.startswith("AC"):
+            raise ValueError("The entered value must start with AC.")
+        if self.contact_type == Contact.physical and not self.is_verified:
+            raise ValueError(
+                "Physical contact reports must be verified")
+        if self.contact_type == Contact.telepathic and self.witness_count < 3:
+            raise ValueError("Telepathic contact requires at least 3 "
+                             "witnesses")
+        if self.signal_strength > 7.0 and not self.message_received:
+            raise ValueError("Strong signals (> 7.0) should include "
+                             "received messages")
+        return self
+
+
+def main():
+    print("Alien Contact Log Validation")
+    print("======================================")
     try:
-        @model_validator(mode='after')
-        def validator_rules(self) -> 'AlienContact':
-            if not self.contact_id.startswith("AC"):
-                raise ValidationError("The entered value must start with AC.")
-            if not self.contact_type == Contact.physical and not self.is_verified:
-                raise ValidationError("Physical contact reports must be verified")
-            if not self.contact_type == Contact.telepathic and self.witness_count < 3:
-                raise ValidationError("Telepathic contact requires at least 3 "
-                                      "witnesses")
-            if self.signal_strength > 7.0 and not self.message_received:
-                raise ValidationError("Strong signals (> 7.0) should include "
-                                      "received messages")
+        data = AlienContact(
+                contact_id="AC_2024_001", timestamp="2026-07-12",
+                location="Area 51, Nevada", contact_type="radio",
+                signal_strength=8.5/10, duration_minutes=45,
+                witness_count=5,
+                message_received="Greetings from Zeta Reticuli")
+        print("Valid contact report:")
+        print(f"ID: {data.contact_id}")
+        print(f"Type: {data.contact_type.value}")
+        print(f"Location: {data.location}")
+        print(f"Signal: {data.signal_strength}")
+        print(f"Duration: {data.duration_minutes} minutes")
+        print(f"Witnesses: {data.witness_count}")
+        print(f"Message: {data.message_received}")
+        print()
+        print("======================================")
+        data = AlienContact(
+            contact_id=" AC_2024_001",
+            location="Area 51, Nevada", contact_type="radio",
+            signal_strength=8.5, duration_minutes=45,
+            witness_count=2, message_received="Greetings from Zeta Reticuli")
+        print("Valid contact report:")
+        print(f"ID: {data.contact_id}")
+        print(f"Type: {data.contact_type}")
+        print(f"Location: {data.location}")
+        print(f"Signal: {data.signal_strength}")
+        print(f"Duration: {data.duration_minutes}")
+        print(f"Witnesses: {data.witness_count}")
+        print(f"Message: {data.message_received}")
     except ValidationError as e:
         print("Expected validation error:")
         print(e)
+
+
+if __name__ == "__main__":
+    main()
