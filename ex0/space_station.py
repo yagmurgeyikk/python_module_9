@@ -1,4 +1,3 @@
-# projenin error mesajlarını düzlenle .error ekle
 from pydantic import BaseModel, Field
 from datetime import datetime
 from typing import Optional
@@ -28,9 +27,9 @@ def main() -> None:
         print("Valid station created:")
         print(f"ID: {data.station_id}")
         print(f"Name: {data.name}")
-        print(f"Crew: {data.crew_size}")
-        print(f"Power: {data.power_level}")
-        print(f"Oxygen: {data.oxygen_level}")
+        print(f"Crew: {data.crew_size} people")
+        print(f"Power: {data.power_level}%")
+        print(f"Oxygen: {data.oxygen_level}%")
         if data.is_operational is True:
             print("Status: Operational")
         else:

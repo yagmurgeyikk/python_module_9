@@ -47,24 +47,24 @@ def main() -> None:
         data = AlienContact(
                 contact_id="AC_2024_001", timestamp="2026-07-12",
                 location="Area 51, Nevada", contact_type="radio",
-                signal_strength=8.5/10, duration_minutes=45,
+                signal_strength=8.5, duration_minutes=45,
                 witness_count=5,
                 message_received="Greetings from Zeta Reticuli")
         print("Valid contact report:")
         print(f"ID: {data.contact_id}")
         print(f"Type: {data.contact_type.value}")
         print(f"Location: {data.location}")
-        print(f"Signal: {data.signal_strength}")
+        print(f"Signal: {data.signal_strength}/10")
         print(f"Duration: {data.duration_minutes} minutes")
         print(f"Witnesses: {data.witness_count}")
         print(f"Message: {data.message_received}")
         print()
         print("======================================")
         data = AlienContact(
-            contact_id=" AC_2024_001",
-            location="Area 51, Nevada", contact_type="radio",
+            contact_id="AC_2024_001", timestamp="2026-07-12",
+            location="Area 51, Nevada", contact_type="telepathic",
             signal_strength=8.5, duration_minutes=45,
-            witness_count=2, message_received="Greetings from Zeta Reticuli")
+            witness_count=1, message_received="Greetings from Zeta Reticuli")
         print("Valid contact report:")
         print(f"ID: {data.contact_id}")
         print(f"Type: {data.contact_type}")

@@ -49,7 +49,8 @@ class SpaceMission(BaseModel):
         if is_true is True:
             pass
         else:
-            raise ValueError("Must have at least one Commander or Captain")
+            raise ValueError(
+                "Mission must have at least one Commander or Captain")
 
         number_crew = len(self.crew)
         i = 0
@@ -77,7 +78,7 @@ class SpaceMission(BaseModel):
         return self
 
 
-def main():
+def main() -> None:
     print("Space Mission Crew Validation")
     print("=========================================")
     try:
@@ -108,7 +109,16 @@ def main():
         print(f"Budget: ${mission.budget_millions}M")
         print(f"Crew size: {len(crew_list)}")
         print("Crew members:")
+        print(f"-{member_one.name} ({CrewRanks.commander.value}) - "
+              f"{member_one.specialization}")
 
+        print(f"-{member_two.name} ({CrewRanks.lieutenant.value}) - "
+              f"{member_two.specialization}")
+        
+        print(f"-{member_three.name} ({CrewRanks.officer.value}) - "
+              f"{member_three.specialization}")
+        print()
+        print("=========================================")
         member_one = CrewMember(
             member_id="one", name="Sarah Connor", rank=CrewRanks.lieutenant,
             age=34, specialization="Mission Command", years_experience=6
