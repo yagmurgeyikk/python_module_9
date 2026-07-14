@@ -60,11 +60,11 @@ class SpaceMission(BaseModel):
                     i += 1
                 else:
                     pass
-        if i > (number_crew/2):
-            pass
-        else:
-            raise ValueError("Long missions (> 365 days) need 50% "
-                             "experienced crew (5+ years)")
+            if i > (number_crew/2):
+                pass
+            else:
+                raise ValueError("Long missions (> 365 days) need 50% "
+                                 "experienced crew (5+ years)")
         j = 0
         for elements in self.crew:
             if elements.is_active is True:
