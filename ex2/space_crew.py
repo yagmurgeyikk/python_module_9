@@ -27,7 +27,7 @@ class SpaceMission(BaseModel):
     mission_id: str = Field(min_length=5, max_length=15)
     mission_name: str = Field(min_length=3, max_length=100)
     destination: str = Field(min_length=3, max_length=50)
-    launch_date: str = datetime
+    launch_date = datetime
     duration_days: int = Field(ge=1, le=3650)
     crew: list[CrewMember]
     mission_status: str = "planned"
@@ -114,7 +114,7 @@ def main() -> None:
 
         print(f"-{member_two.name} ({CrewRanks.lieutenant.value}) - "
               f"{member_two.specialization}")
-        
+
         print(f"-{member_three.name} ({CrewRanks.officer.value}) - "
               f"{member_three.specialization}")
         print()
