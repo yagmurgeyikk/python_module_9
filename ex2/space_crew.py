@@ -27,7 +27,7 @@ class SpaceMission(BaseModel):
     mission_id: str = Field(min_length=5, max_length=15)
     mission_name: str = Field(min_length=3, max_length=100)
     destination: str = Field(min_length=3, max_length=50)
-    launch_date = datetime
+    launch_date: datetime
     duration_days: int = Field(ge=1, le=3650)
     crew: list[CrewMember]
     mission_status: str = "planned"
@@ -101,7 +101,7 @@ def main() -> None:
         mission = SpaceMission(
             mission_name="Mars Colony Establishment", mission_id="M2024_MARS",
             destination="Mars", duration_days=900, budget_millions=2500.0,
-            crew=crew_list)
+            crew=crew_list, launch_date="2026-07-04")
         print(f"Mission: {mission.mission_name}")
         print(f"ID: {mission.mission_id}")
         print(f"Destination: {mission.destination}")
@@ -139,7 +139,7 @@ def main() -> None:
         mission = SpaceMission(
             mission_name="Mars Colony Establishment", mission_id="M2024_MARS",
             destination="Mars", duration_days=900, budget_millions=2500.0,
-            crew=crew_list_two)
+            crew=crew_list_two, launch_date="2026-07-04")
 
     except ValidationError as e:
         print("Expected validation error:")
