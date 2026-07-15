@@ -74,7 +74,7 @@ class SpaceMission(BaseModel):
         if j == number_crew:
             pass
         else:
-            print("All crew members must be active")
+            raise ValueError("All crew members must be active")
         return self
 
 
