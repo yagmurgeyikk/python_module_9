@@ -45,8 +45,9 @@ def main() -> None:
     print("======================================")
     try:
         data = AlienContact(
-                contact_id="AC_2024_001", timestamp="2026-07-12",
-                location="Area 51, Nevada", contact_type="radio",
+                contact_id="AC_2024_001",
+                timestamp=datetime.fromisoformat("2026-07-12"),
+                location="Area 51, Nevada", contact_type=Contact.radio,
                 signal_strength=8.5, duration_minutes=45,
                 witness_count=5,
                 message_received="Greetings from Zeta Reticuli")
@@ -61,8 +62,9 @@ def main() -> None:
         print()
         print("======================================")
         data = AlienContact(
-            contact_id="AC_2024_001", timestamp="2026-07-12",
-            location="Area 51, Nevada", contact_type="telepathic",
+            contact_id="AC_2024_001",
+            timestamp=datetime.fromisoformat("2026-07-12"),
+            location="Area 51, Nevada", contact_type=Contact.telepathic,
             signal_strength=8.5, duration_minutes=45,
             witness_count=1, message_received="Greetings from Zeta Reticuli")
         print("Valid contact report:")

@@ -22,7 +22,7 @@ def main() -> None:
         data = SpaceStation(
             station_id="ISS001", name="International Space Station",
             crew_size=6, power_level=85.5, oxygen_level=92.3,
-            last_maintenance="2026-07-11")
+            last_maintenance=datetime.fromisoformat("2026-07-11"))
 
         print("Valid station created:")
         print(f"ID: {data.station_id}")
@@ -39,7 +39,7 @@ def main() -> None:
         data = SpaceStation(
             station_id="ISS001", name="International Space Station",
             crew_size=21, power_level=85.5, oxygen_level=92.3,
-            last_maintenance="2026-07-11")
+            last_maintenance=datetime.fromisoformat("2026-07-11"))
         print("Valid station created:")
         print(f"ID: {data.station_id}")
         print(f"Name: {data.name}")

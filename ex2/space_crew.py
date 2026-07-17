@@ -101,7 +101,7 @@ def main() -> None:
         mission = SpaceMission(
             mission_name="Mars Colony Establishment", mission_id="M2024_MARS",
             destination="Mars", duration_days=900, budget_millions=2500.0,
-            crew=crew_list, launch_date="2026-07-04")
+            crew=crew_list, launch_date=datetime.fromisoformat("2026-07-04"))
         print(f"Mission: {mission.mission_name}")
         print(f"ID: {mission.mission_id}")
         print(f"Destination: {mission.destination}")
@@ -139,7 +139,8 @@ def main() -> None:
         mission = SpaceMission(
             mission_name="Mars Colony Establishment", mission_id="M2024_MARS",
             destination="Mars", duration_days=900, budget_millions=2500.0,
-            crew=crew_list_two, launch_date="2026-07-04")
+            crew=crew_list_two,
+            launch_date=datetime.fromisoformat("2026-07-04"))
 
     except ValidationError as e:
         print("Expected validation error:")
