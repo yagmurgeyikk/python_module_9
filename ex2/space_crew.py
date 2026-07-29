@@ -6,11 +6,11 @@ from pydantic import model_validator
 
 
 class CrewRanks(Enum):
-    cadet = "cadet"
-    officer = "officer"
-    lieutenant = "lieutenant"
-    captain = "captain"
-    commander = "commander"
+    CADET = "cadet"
+    OFFICER = "officer"
+    LIEUTENANT = "lieutenant"
+    CAPTAIN = "captain"
+    COMMANDER = "commander"
 
 
 class CrewMember(BaseModel):
