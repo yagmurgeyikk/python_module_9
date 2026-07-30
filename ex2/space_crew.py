@@ -83,17 +83,17 @@ def main() -> None:
     print("=========================================")
     try:
         member_one = CrewMember(
-            member_id="one", name="Sarah Connor", rank=CrewRanks.commander,
+            member_id="one", name="Sarah Connor", rank=CrewRanks.COMMANDER,
             age=34, specialization="Mission Command", years_experience=6
         )
 
         member_two = CrewMember(
-            member_id="two", name="John Smith", rank=CrewRanks.lieutenant,
+            member_id="two", name="John Smith", rank=CrewRanks.LIEUTENANT,
             age=30, specialization="Navigation", years_experience=19
         )
 
         member_three = CrewMember(
-            member_id="three", name="Alice Johnson", rank=CrewRanks.officer,
+            member_id="three", name="Alice Johnson", rank=CrewRanks.OFFICER,
             age=28, specialization="Engineering", years_experience=43
         )
         crew_list = [member_one, member_two, member_three]
@@ -109,28 +109,28 @@ def main() -> None:
         print(f"Budget: ${mission.budget_millions}M")
         print(f"Crew size: {len(crew_list)}")
         print("Crew members:")
-        print(f"-{member_one.name} ({CrewRanks.commander.value}) - "
+        print(f"-{member_one.name} ({CrewRanks.COMMANDER.value}) - "
               f"{member_one.specialization}")
 
-        print(f"-{member_two.name} ({CrewRanks.lieutenant.value}) - "
+        print(f"-{member_two.name} ({CrewRanks.LIEUTENANT.value}) - "
               f"{member_two.specialization}")
 
-        print(f"-{member_three.name} ({CrewRanks.officer.value}) - "
+        print(f"-{member_three.name} ({CrewRanks.OFFICER.value}) - "
               f"{member_three.specialization}")
         print()
         print("=========================================")
         member_one = CrewMember(
-            member_id="one", name="Sarah Connor", rank=CrewRanks.lieutenant,
+            member_id="one", name="Sarah Connor", rank=CrewRanks.LIEUTENANT,
             age=34, specialization="Mission Command", years_experience=6
         )
 
         member_two = CrewMember(
-            member_id="two", name="John Smith", rank=CrewRanks.lieutenant,
+            member_id="two", name="John Smith", rank=CrewRanks.LIEUTENANT,
             age=30, specialization="Navigation", years_experience=19
         )
 
         member_three = CrewMember(
-            member_id="three", name="Alice Johnson", rank=CrewRanks.lieutenant,
+            member_id="three", name="Alice Johnson", rank=CrewRanks.LIEUTENANT,
             age=28, specialization="Engineering", years_experience=43
         )
 
