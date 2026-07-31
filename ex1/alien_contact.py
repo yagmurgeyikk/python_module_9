@@ -7,10 +7,10 @@ from pydantic import model_validator
 
 
 class Contact(Enum):
-    radio = "radio"
-    visual = "visual"
-    physical = "physical"
-    telepathic = "telepathic"
+    RADIO = "radio"
+    VISUAL = "visual"
+    PHYSICAL = "physical"
+    TELEPATHIC = "telepathic"
 
 
 class AlienContact(BaseModel):
@@ -28,10 +28,10 @@ class AlienContact(BaseModel):
     def validator_rules(self) -> 'AlienContact':
         if not self.contact_id.startswith("AC"):
             raise ValueError("The entered value must start with AC.")
-        if self.contact_type == Contact.physical and not self.is_verified:
+        if self.contact_type == Contact.PHYSICAL and not self.is_verified:
             raise ValueError(
                 "Physical contact reports must be verified")
-        if self.contact_type == Contact.telepathic and self.witness_count < 3:
+        if self.contact_type == Contact.TELEPATHIC and self.witness_count < 3:
             raise ValueError("Telepathic contact requires at least 3 "
                              "witnesses")
         if self.signal_strength > 7.0 and not self.message_received:
@@ -46,8 +46,8 @@ def main() -> None:
     try:
         data = AlienContact(
                 contact_id="AC_2024_001",
-                timestamp=datetime.fromisoformat("2026-07-12"),
-                location="Area 51, Nevada", contact_type=Contact.radio,
+                timestamp=datetime.now(),
+                location="Area 51, Nevada", contact_type=Contact.RADIO,
                 signal_strength=8.5, duration_minutes=45,
                 witness_count=5,
                 message_received="Greetings from Zeta Reticuli")
@@ -59,12 +59,13 @@ def main() -> None:
         print(f"Duration: {data.duration_minutes} minutes")
         print(f"Witnesses: {data.witness_count}")
         print(f"Message: {data.message_received}")
+        print(data.timestamp)
         print()
         print("======================================")
         data = AlienContact(
             contact_id="AC_2024_001",
-            timestamp=datetime.fromisoformat("2026-07-12"),
-            location="Area 51, Nevada", contact_type=Contact.telepathic,
+            timestamp=datetime.now(),
+            location="Area 51, Nevada", contact_type=Contact.TELEPATHIC,
             signal_strength=8.5, duration_minutes=45,
             witness_count=1, message_received="Greetings from Zeta Reticuli")
         print("Valid contact report:")
@@ -72,6 +73,8 @@ def main() -> None:
         print(f"Type: {data.contact_type}")
         print(f"Location: {data.location}")
         print(f"Signal: {data.signal_strength}")
+        print(f"Duration: {data.duration_minutes}")
+        print(f"Witnesses: {data.witness_count}")
         print(f"Duration: {data.duration_minutes}")
         print(f"Witnesses: {data.witness_count}")
         print(f"Message: {data.message_received}")
