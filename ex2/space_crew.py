@@ -67,7 +67,7 @@ class SpaceMission(BaseModel):
                                  "experienced crew (5+ years)")
         j = 0
         for elements in self.crew:
-            if elements.is_active is True:
+            if elements.is_active:
                 j += 1
             else:
                 pass
